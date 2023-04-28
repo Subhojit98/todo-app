@@ -3,6 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +13,9 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(to bottom, #2c3333, #2d3838, #2d3d3d, #2e4343, #2e4848, #2e4f4f, #2d5555, #2c5c5c, #296666, #246f71, #1d797c, #0e8388);
+  width: 100%;
+  height: 100%;
 }
 
 code {
