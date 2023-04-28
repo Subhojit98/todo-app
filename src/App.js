@@ -21,7 +21,8 @@ function App() {
     }
     const addTaskToStore = {
       id: storedTask.length === 0 ? 1 : storedTask.length + 1,
-      taskName: currentTask
+      taskName: currentTask,
+      isCompleted: false
     }
     setToStore([...storedTask, addTaskToStore])
   }
@@ -33,26 +34,20 @@ function App() {
     setToStore(newTaskList)
   }
 
-  const TaskDone = ()=>{
-    
+  const TaskDone = (taskId) => {
+
+    setToStore(storedTask.map((task) => {
+      if (task === taskId) {
+        return { ...task, isCompleted: true }
+      }
+      return task
+    }))
+
   }
-
-  const listBackground = ["#00d5f7", "#ff8400", "#7900FF", "#ff60a8"]
-  let backCount = 0
-  const setBackground = () => {
-    if (backCount >= listBackground.length) backCount = 0
-
-    const chosenBackground = listBackground[backCount]
-    backCount++
-    return chosenBackground
-  }
-
-
   const closeAlert = () => {
     handleAlert("none")
     setAlert(false)
     handleAlert("flex")
-
   }
 
   return (
@@ -63,7 +58,7 @@ function App() {
       <div className="w-full h-auto flex justify-center">
         <div className="w-8/12 h-screen overflow-x-auto bg-neutral-800 shadow-2xl shadow-neutral-500 rounded-md flex flex-col items-center">
           <AddTask hedaText="What's The Plan For Today" inputOnChange={currentTaskOnchange} addTaskbtn={addTask} />
-          <ShowTaskList taskListToShow={storedTask} deleteTaskBtn={deleteTask} bgChange={setBackground()} />
+          <ShowTaskList taskListToShow={storedTask} deleteTaskBtn={deleteTask} taskDoneBtn={TaskDone} />
         </div>
       </div>
 
